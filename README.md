@@ -32,7 +32,7 @@ The function should return the index position of the &quot;)&quot; right after &
 
 Write a psr-4 package to validate excel file format and its data. For this test, you will have to validate two types of excel file Type\_A and Type\_B.
 
-# General Rules
+## General Rules
 
 1. Column name that starts with # should not contain any space
 
@@ -56,14 +56,14 @@ For example, Type\_A file should only contains 5 columns and the header column n
 
 Two sample file is provided namely Type\_A.xlsx and Type\_B.xlsx.
 
-# Sample Output when validating Type\_A.xlsx
+## Sample Output when validating Type\_A.xlsx
 
 | Row | Error |
 | --- | --- |
 | 3 | Missing value in Field\_A, Field\_B should not contain any space, Missing value in Field\_D |
 | 4 | Missing value in Field\_A,Missing value in Field\_E |
 
-# Sample Output when validating Type\_B.xlsx
+## Sample Output when validating Type\_B.xlsx
 
 | Row | Error |
 | --- | --- |
@@ -73,7 +73,7 @@ Two sample file is provided namely Type\_A.xlsx and Type\_B.xlsx.
 
 It will be nice if new file type(Type\_C) can be integrated by just adding Type\_C.php
 
-# Coding Recommendation
+## Coding Recommendation
 
 1. Follow DRY principle
 
@@ -81,10 +81,10 @@ It will be nice if new file type(Type\_C) can be integrated by just adding Type\
 
 3. Incorporate design patterns in your code
 
-# Sources
+## Sources
 
 ● Type\_A.xlsx
 
 ● Type\_B.xlsx
 
-#Enjoy your test!
+# Enjoy your test!
