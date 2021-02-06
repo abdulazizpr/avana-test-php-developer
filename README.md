@@ -1,4 +1,4 @@
-#Getting Started
+# Getting Started
 
 ● Start the test in your local env
 
@@ -8,7 +8,7 @@
 
 ● Create public repository for this test, and send us your repository link
 
-#Test 1
+# Test 1
 
 Write a function as follows:
 
@@ -20,7 +20,7 @@ Write a function as follows:
 
 You can write the function in PHP.
 
-#Example
+# Example
 
 If the function receives &quot;a (b c (d e (f) g) h) i (j k)&quot; and 2 as arguments.
 
@@ -28,11 +28,11 @@ nameYourFunction(&quot;a (b c (d e (f) g) h) i (j k)&quot;, 2); // 2 here indica
 
 The function should return the index position of the &quot;)&quot; right after &quot;h&quot;, in this case, the return value is 20.
 
-#Test 2
+# Test 2
 
 Write a psr-4 package to validate excel file format and its data. For this test, you will have to validate two types of excel file Type\_A and Type\_B.
 
-#General Rules
+# General Rules
 
 1. Column name that starts with # should not contain any space
 
@@ -56,24 +56,24 @@ For example, Type\_A file should only contains 5 columns and the header column n
 
 Two sample file is provided namely Type\_A.xlsx and Type\_B.xlsx.
 
-#Sample Output when validating Type\_A.xlsx
+# Sample Output when validating Type\_A.xlsx
 
 | Row | Error |
 | --- | --- |
 | 3 | Missing value in Field\_A, Field\_B should not contain any space, Missing value in Field\_D |
 | 4 | Missing value in Field\_A,Missing value in Field\_E |
 
-#Sample Output when validating Type\_B.xlsx
+# Sample Output when validating Type\_B.xlsx
 
 | Row | Error |
 | --- | --- |
 | 3 | Missing value in Field\_A, Field\_B should not contain any space |
 
-#Bonus
+# Bonus
 
 It will be nice if new file type(Type\_C) can be integrated by just adding Type\_C.php
 
-#Coding Recommendation
+# Coding Recommendation
 
 1. Follow DRY principle
 
@@ -81,7 +81,7 @@ It will be nice if new file type(Type\_C) can be integrated by just adding Type\
 
 3. Incorporate design patterns in your code
 
-#Sources
+# Sources
 
 ● Type\_A.xlsx
 
