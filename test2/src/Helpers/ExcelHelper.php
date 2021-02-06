@@ -18,21 +18,21 @@ class ExcelHelper
     /**
      * Define extensions
      * 
-     * @var string $fileName
+     * @var array $extensions
     */
     protected $extensions = ['xlsx', 'xls', 'csv'];
 
     /**
      * Define path info
      * 
-     * @var string $fileName
+     * @var array $pathInfo
     */
     protected $pathInfo = null;
 
     /**
      * Define header
      * 
-     * @var string $fileName
+     * @var int $header
     */
     protected $header = 0;
 
@@ -145,7 +145,6 @@ class ExcelHelper
 
         foreach ($data as $key => $columns) {
             $messages = [];
-            $messageGroups = [];
             
             $countNull = 0;
             foreach ($columns as $columnKey => $value) {
@@ -157,7 +156,7 @@ class ExcelHelper
                     $countNull++;
                 }
 
-                //check if value empty or null
+                //check if value empty or null and requried
                 if (
                     (!$value && $value != 'null') && 
                     (
@@ -168,7 +167,7 @@ class ExcelHelper
                     $messages[$columnKey] = 'Missing value in ' . $column;
                 }
 
-                //check if value contains 
+                //check if value contains and no space
                 if (
                     strpos($value, ' ') !== false && 
                     (
