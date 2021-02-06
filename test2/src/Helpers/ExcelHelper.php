@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace Abdulazizpr\Helpers;
 
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
@@ -122,6 +122,11 @@ class ExcelHelper
             ->toArray();
     }
 
+    protected function getColumnName($column)
+    {
+        return str_replace('*', '', str_replace('#', '', $column));
+    }
+
     /**
      * Check validation data
      * 
@@ -135,9 +140,13 @@ class ExcelHelper
 
         foreach ($data as $key => $columns) {
             $messages = [];
+            $messageGroups = [];
             
             $countNull = 0;
             foreach ($columns as $columnKey => $value) {
+                //remove character * and #
+                $column = $this->getColumnName($errorDefinition[$columnKey]['column']);
+                
                 //For counter null on all column cell
                 if (!$value && $value != 'null') {
                     $countNull++;
@@ -147,22 +156,22 @@ class ExcelHelper
                 if (
                     (!$value && $value != 'null') && 
                     (
-                        isset($errorDefinition[$columnKey]) && 
-                        $errorDefinition[$columnKey]['validation'] === 'required'
+                        isset($errorDefinition[$columnKey]['required']) && 
+                        $errorDefinition[$columnKey]['required'] == true
                     )
                 ) {
-                    $messages[$columnKey] = 'Missing value in ' . $errorDefinition[$columnKey]['column'];
+                    $messages[$columnKey] = 'Missing value in ' . $column;
                 }
 
                 //check if value contains 
                 if (
                     strpos($value, ' ') !== false && 
                     (
-                        isset($errorDefinition[$columnKey]) && 
-                        $errorDefinition[$columnKey]['validation'] === 'space'
+                        isset($errorDefinition[$columnKey]['space']) && 
+                        $errorDefinition[$columnKey]['space'] == true
                     )
                 ) {
-                    $messages[$columnKey] = $errorDefinition[$columnKey]['column'] . ' should not contain any space';
+                    $messages[$columnKey] = $column . ' should not contain any space';
                 }
             }
 
@@ -191,21 +200,53 @@ class ExcelHelper
             $firstChar = $column[0];
             $lastChar = $column[strlen($column)-1];
 
+            $errorDefinition[$key]['column'] = $column;
+            $errorDefinition[$key]['space'] = false;
+            $errorDefinition[$key]['required'] = false;
+
             if ($firstChar === '#') {
-                $errorDefinition[$key] = [
-                    'validation' => 'space',
-                    'column' => $column
-                ];
+                $errorDefinition[$key]['space'] = true;
             }
 
             if ($lastChar === '*') {
-                $errorDefinition[$key] = [
-                    'validation' => 'required',
-                    'column' => $column
-                ];
+                $errorDefinition[$key]['required'] = true;
             }
         }
 
         return $errorDefinition;
+    }
+
+    /**
+     * Show Errors Tables
+     * 
+     * @return string
+    */
+    public function showErrorsTable() {
+        $data = $this->validations();
+
+        if (count($data) <= 0) {
+            return 'Error not found</br>';
+        }
+
+        $table = '<table border=1>';
+        $table .= '<thead>';
+            $table .= '<tr>';
+                $table .= "<th>Row</th>";
+                $table .= "<th>Error</th>";
+            $table .= '</tr>';
+        $table .= '</thead>';
+
+        $table .= '<tbody>';
+        foreach ($data as $row => $message) {
+            $table .= '<tr>';
+                $table .= "<td>" . ($row+1) . "</td>";
+                $table .= "<td>" . $message . "</td>";
+            $table .= '</tr>';
+        }
+        $table .= '</tbody>';
+
+        $table .= '</table></br>';
+
+        return $table;
     }
 }
