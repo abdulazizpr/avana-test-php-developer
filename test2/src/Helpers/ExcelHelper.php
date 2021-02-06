@@ -122,6 +122,11 @@ class ExcelHelper
             ->toArray();
     }
 
+    /**
+     * Get column remove * and #
+     * 
+     * @return string 
+    */
     protected function getColumnName($column)
     {
         return str_replace('*', '', str_replace('#', '', $column));
